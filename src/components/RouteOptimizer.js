@@ -1,8 +1,47 @@
 import React, { useState } from 'react';
-import { Card, CardContent } from "./Card";
-import { Button } from "./Button";
-import { Textarea } from "./Textarea";
-import { Switch } from "./Switch";
+
+const Card = ({ children, className = "" }) => (
+    <div className={`bg-white p-6 rounded-2xl shadow-lg ${className}`}>
+        {children}
+    </div>
+);
+
+const CardContent = ({ children }) => (
+    <div className="text-gray-800">
+        {children}
+    </div>
+);
+
+const Button = ({ children, onClick }) => (
+    <button
+        onClick={onClick}
+        className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+    >
+        {children}
+    </button>
+);
+
+const Textarea = ({ placeholder, rows, value, onChange, className = "" }) => (
+    <textarea
+        placeholder={placeholder}
+        rows={rows}
+        value={value}
+        onChange={onChange}
+        className={`w-full p-3 border border-gray-300 rounded-lg mb-4 ${className}`}
+    />
+);
+
+const Switch = ({ checked, onChange, className = "" }) => (
+    <label className={`flex items-center cursor-pointer ${className}`}>
+        <input
+            type="checkbox"
+            checked={checked}
+            onChange={onChange}
+            className="mr-2"
+        />
+        <span>{checked ? "On" : "Off"}</span>
+    </label>
+);
 
 const RouteOptimizer = () => {
     const [addresses, setAddresses] = useState("");
@@ -32,11 +71,10 @@ const RouteOptimizer = () => {
                         rows={6}
                         value={addresses}
                         onChange={(e) => setAddresses(e.target.value)}
-                        className="mb-4"
                     />
                     <div className="flex items-center mb-4">
-                        <Switch checked={roundTrip} onChange={() => setRoundTrip(!roundTrip)} className="mr-2" />
-                        <span>Return to Starting Point</span>
+                        <Switch checked={roundTrip} onChange={() => setRoundTrip(!roundTrip)} />
+                        <span className="ml-2">Return to Starting Point</span>
                     </div>
                     <Button onClick={generateRoute}>
                         Get Shortest Route
