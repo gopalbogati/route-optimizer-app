@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Switch } from "@/components/ui/switch";
+import { Card, CardContent } from "./Card";
+import { Button } from "./Button";
+import { Textarea } from "./Textarea";
+import { Switch } from "./Switch";
 
 const RouteOptimizer = () => {
     const [addresses, setAddresses] = useState("");
@@ -35,7 +35,7 @@ const RouteOptimizer = () => {
                         className="mb-4"
                     />
                     <div className="flex items-center mb-4">
-                        <Switch checked={roundTrip} onCheckedChange={setRoundTrip} className="mr-2" />
+                        <Switch checked={roundTrip} onChange={() => setRoundTrip(!roundTrip)} className="mr-2" />
                         <span>Return to Starting Point</span>
                     </div>
                     <Button onClick={generateRoute}>
